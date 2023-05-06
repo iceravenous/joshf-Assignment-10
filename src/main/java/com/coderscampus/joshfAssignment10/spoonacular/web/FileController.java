@@ -11,6 +11,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.coderscampus.joshfAssignment10.spoonacular.dto.Meals;
 import com.coderscampus.joshfAssignment10.spoonacular.dto.SpoonacularResponse;
+import com.coderscampus.joshfAssignment10.spoonacular.dto.WeekResponse;
+import com.coderscampus.joshfAssignment10.spoonacular.dto.DayResponse;
 
 
 @RestController
@@ -23,7 +25,8 @@ public class FileController {
 //	String diet = "Vegetarian";
 //	String exclusions = "Seafood";
 	@GetMapping("/mealplanner/day")
-		public void getDayMeals(@RequestParam String numCalories, 
+		public ResponseEntity<DayResponse> getDayMeals(@RequestParam String numCalories,
+//	public void getDayMeals(@RequestParam String numCalories,
 								@RequestParam(required = false) String diet, 
 								@RequestParam(required = false) String exclusions){
 			RestTemplate rt = new RestTemplate();
@@ -37,20 +40,22 @@ public class FileController {
 					.build()
 					.toUri();
 			
-			ResponseEntity<SpoonacularResponse> response = rt.getForEntity(uri, SpoonacularResponse.class);
+			ResponseEntity<DayResponse> response = rt.getForEntity(uri, DayResponse.class);
 			System.out.println(response.getBody());
+			return response;
 		
 	}
 
 	@GetMapping("/mealplanner/week")
-	public void getWeekMeals(@RequestParam String timeFrame,
-							@RequestParam String numCalories, 
+	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam String numCalories,
+//	public void getWeekMeals(@RequestParam String timeFrame,
+//							@RequestParam String numCalories, 
 							@RequestParam(required = false) String diet, 
 							@RequestParam(required = false) String exclusions){
 		RestTemplate rt = new RestTemplate();
-		
+		timeFrame = "week";
 		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
-				.queryParam("timeFrame", timeFrame)
+				.queryParam("timeFrame", "week")
 				.queryParam("targetCalories", numCalories)
 				.queryParam("diet", diet)
 				.queryParam("exclude", exclusions)
@@ -58,9 +63,9 @@ public class FileController {
 				.build()
 				.toUri();
 
-		ResponseEntity<SpoonacularResponse> response = rt.getForEntity(uri, SpoonacularResponse.class);
+		ResponseEntity<WeekResponse> response = rt.getForEntity(uri, WeekResponse.class);
 		System.out.println(response.getBody());
-	
+		return response;
 }
 	
 }

@@ -5,8 +5,8 @@ public class Meals {
 	private String imageType;
 	private String title;
 	private Integer readyInMinutes;
-	private Integer servinges;
-	private String sourceurl;
+	private Integer servings;
+	private String sourceUrl;
 	public Integer getId() {
 		return id;
 	}
@@ -31,17 +31,17 @@ public class Meals {
 	public void setReadyInMinutes(Integer readyInMinutes) {
 		this.readyInMinutes = readyInMinutes;
 	}
-	public Integer getServinges() {
-		return servinges;
+	public Integer getServings() {
+		return servings;
 	}
-	public void setServinges(Integer servinges) {
-		this.servinges = servinges;
+	public void setServings(Integer servings) {
+		this.servings = servings;
 	}
-	public String getSourceurl() {
-		return sourceurl;
+	public String getSourceUrl() {
+		return sourceUrl;
 	}
-	public void setSourceurl(String sourceurl) {
-		this.sourceurl = sourceurl;
+	public void setSourceUrl(String sourceurl) {
+		this.sourceUrl = sourceurl;
 	}
 	
 	

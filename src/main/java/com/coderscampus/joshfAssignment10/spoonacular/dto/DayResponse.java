@@ -1,18 +1,9 @@
 package com.coderscampus.joshfAssignment10.spoonacular.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+public class DayResponse {
 
-public class SpoonacularResponse {
-	
-	@JsonProperty ("meals")
-	private Meals[] meals; 
-	
-	@JsonProperty ("nutrients")
+	private Meals[] meals;
 	private Nutrients nutrients;
-	
-	@JsonProperty ("week")
-	private Week week;
-	
 	
 	public Meals[] getMeals() {
 		return meals;
