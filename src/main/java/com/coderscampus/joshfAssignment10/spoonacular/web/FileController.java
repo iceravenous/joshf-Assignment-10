@@ -33,7 +33,7 @@ public class FileController {
 			
 			URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
 					.queryParam("timeFrame", "day")
-					.queryParam("targetCalories", 1000)
+					.queryParam("targetCalories", numCalories)
 					.queryParam("diet", diet)
 					.queryParam("exclude", exclusions)
 					.queryParam("apiKey", "097269045a81483cba7bb4c95792d406")
