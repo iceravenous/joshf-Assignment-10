@@ -25,7 +25,7 @@ public class FileController {
 //	String diet = "Vegetarian";
 //	String exclusions = "Seafood";
 	@GetMapping("/mealplanner/day")
-		public ResponseEntity<DayResponse> getDayMeals(@RequestParam String numCalories,
+		public ResponseEntity<DayResponse> getDayMeals(@RequestParam(required = false) String numCalories,
 //	public void getDayMeals(@RequestParam String numCalories,
 								@RequestParam(required = false) String diet, 
 								@RequestParam(required = false) String exclusions){
