@@ -47,7 +47,7 @@ public class FileController {
 	}
 
 	@GetMapping("/mealplanner/week")
-	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam String numCalories,
+	public ResponseEntity<WeekResponse> getWeekMeals(@RequestParam(required = false) String numCalories,
 //	public void getWeekMeals(@RequestParam String timeFrame,
 //							@RequestParam String numCalories, 
 							@RequestParam(required = false) String diet, 
