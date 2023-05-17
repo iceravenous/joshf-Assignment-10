@@ -3,6 +3,7 @@ package com.coderscampus.joshfAssignment10.spoonacular.web;
 import java.net.URI;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.coderscampus.joshfAssignment10.spoonacular.dto.Meals;
-import com.coderscampus.joshfAssignment10.spoonacular.dto.SpoonacularResponse;
 import com.coderscampus.joshfAssignment10.spoonacular.dto.WeekResponse;
 import com.coderscampus.joshfAssignment10.spoonacular.dto.DayResponse;
 
@@ -21,8 +20,13 @@ public class FileController {
 
 //	@GetMapping("mealplanner/week")
 //		public ResponseEntity<WeekResponse> getWeekMeals(String numCalories, String diet, String exclusions);
+	@Value("${spoonacular.urls.base}")
+	private String base;
+	@Value("${spoonacular.urls.mealplan}")
+	private String plan;
+	
 	String timeFrame = "day";
-String numCalories = "";
+	String numCalories = "";
 	String diet = "";
 	String exclusions = "";
 	@GetMapping("/mealplanner/day")
@@ -32,7 +36,8 @@ String numCalories = "";
 								@RequestParam(required = false) String exclusions){
 			RestTemplate rt = new RestTemplate();
 			
-			URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
+//			URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
+			URI uri = UriComponentsBuilder.fromHttpUrl(base+plan)
 					.queryParam("timeFrame", "day")
 					.queryParamIfPresent("targetCalories", Optional.ofNullable(numCalories))
 					.queryParamIfPresent("diet", Optional.ofNullable(diet))
@@ -41,12 +46,8 @@ String numCalories = "";
 					.build()
 					.toUri();
 			
-			System.out.println("\n");
-			System.out.print("URI: ");
-			System.out.println(uri.toString());			
 			ResponseEntity<DayResponse> response = rt.getForEntity(uri, DayResponse.class);
 
-			System.out.println(response);
 			return response;
 		
 	}
@@ -56,7 +57,7 @@ String numCalories = "";
 							@RequestParam(required = false) String diet, 
 							@RequestParam(required = false) String exclusions){
 		RestTemplate rt = new RestTemplate();
-		URI uri = UriComponentsBuilder.fromHttpUrl("https://api.spoonacular.com/mealplanner/generate")
+		URI uri = UriComponentsBuilder.fromHttpUrl(base+plan)
 				.queryParam("timeFrame", "week")
 				.queryParamIfPresent("targetCalories", Optional.ofNullable(numCalories))
 				.queryParamIfPresent("diet", Optional.ofNullable(diet))
@@ -65,13 +66,8 @@ String numCalories = "";
 				.build()
 				.toUri();
 		
-		System.out.println("\n");
-		System.out.print("URI: ");
-		System.out.println(uri.toString());	
-		
 		ResponseEntity<WeekResponse> response = rt.getForEntity(uri, WeekResponse.class);
-		
-		System.out.println(response);
+
 		return response;
 }
 	
